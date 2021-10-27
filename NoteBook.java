@@ -1,6 +1,6 @@
 package by.epam.task2;
 import java.util.ArrayList;
-
+import java.util.Objects;
 
 public class NoteBook
 {
@@ -17,7 +17,23 @@ public class NoteBook
 		this.notes = notes;
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		NoteBook noteBook = (NoteBook) o;
+		return userAccountId == noteBook.userAccountId &&
+				notes.equals(noteBook.notes);
+	}
 
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(userAccountId, notes);
+	}
 
 	@Override
 	public String toString()
@@ -46,6 +62,26 @@ class Note
 		this.title = title;
 		this.content = content;
 		this.dateCreated = dateCreated;
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Note note = (Note) o;
+		return id == note.id &&
+				title.equals(note.title) &&
+				content.equals(note.content) &&
+				dateCreated.equals(note.dateCreated);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(id, title, content, dateCreated);
 	}
 
 	@Override
@@ -112,5 +148,3 @@ class NoteBookProvider
 		return instance;
 	}
 }
-
-
