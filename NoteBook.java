@@ -17,6 +17,26 @@ public class NoteBook
 		this.notes = notes;
 	}
 
+	public int getUserAccountId()
+	{
+		return userAccountId;
+	}
+
+	public void setUserAccountId(int userAccountId)
+	{
+		this.userAccountId = userAccountId;
+	}
+
+	public ArrayList<Note> getNotes()
+	{
+		return notes;
+	}
+
+	public void setNotes(ArrayList<Note> notes)
+	{
+		this.notes = notes;
+	}
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -120,7 +140,9 @@ class Test
 	{
 
 		ArrayList <Note> db = new ArrayList<Note>();
-		NoteBook notebook1 = new NoteBook(1, db);
+		NoteBookProvider instance = NoteBookProvider.getInstance();
+		System.out.println("instance = " + instance);
+		NoteBook notebook1 = instance.getNoteBook();
 
 		db.add(new Note(1, "Text", "Desc", "10/26/2021"));
 		db.add(new Note(2, "Text", "Desc", "10/26/2021" ));
@@ -139,12 +161,22 @@ class Test
 class NoteBookProvider
 {
 
-	private static NoteBookProvider instance = null;
-	private NoteBook noteBook = new NoteBook();
-	private NoteBookProvider (){}
+	private static NoteBookProvider instance = new NoteBookProvider();
+	private  NoteBook noteBook = new NoteBook();
+		private NoteBookProvider (){}
 
 	public static NoteBookProvider getInstance(){
 
 		return instance;
+	}
+
+	public NoteBook getNoteBook()
+	{
+		return noteBook;
+	}
+
+	public void setNoteBook(NoteBook noteBook)
+	{
+		this.noteBook = noteBook;
 	}
 }
